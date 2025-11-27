@@ -29,6 +29,10 @@ readarray -t UNIQUE < <(printf "%s\n" "${RESULT[@]}" | sort -u)
 
 # ----- Print JSON-friendly list -----
 
+echo ""
+echo "Copy this into your settings.json → python.analysis.extraPaths:"
+echo ""
+
 echo "["
 for i in "${!UNIQUE[@]}"; do
     path=${UNIQUE[$i]}

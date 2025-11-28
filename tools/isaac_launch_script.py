@@ -10,15 +10,16 @@ parser.add_argument("--world_file", required=True, help="Full path to the world 
 parser.add_argument("--robot_file", help="Full path to the robot file")
 parser.add_argument("--headless", default="False", help="Run stage headless")
 parser.add_argument("--renderer", default="RayTracedLighting", choices=["RayTracedLighting", "PathTracing"], help="Renderer to use")
+parser.add_argument("--experience", default="", help="Path to the Omniverse Experience")
 args, unknown = parser.parse_known_args()
 
 # This sample loads a usd stage and starts simulation
-CONFIG = {"width": 1280, "height": 720, "sync_loads": True, "headless": False, "renderer": "RayTracedLighting"}
-
+CONFIG = {"width": 1280, "height": 720, "sync_loads": True, "headless": False, "renderer": "RayTracedLighting", "experience": ""}
 # Start the omniverse application
 if "True" in args.headless:
 	CONFIG["headless"] = True
 CONFIG["renderer"] = args.renderer
+CONFIG["experience"] = args.experience
 simulation_app = SimulationApp(launch_config=CONFIG)
 
 # Now that the simulation app is open, continue to load the extension, world and robot

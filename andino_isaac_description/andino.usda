@@ -930,7 +930,7 @@ def Xform "andino" (
         {
             custom uchar inputs:domain_id = 0
             custom bool inputs:useDomainIDEnvVar = 0
-            token node:type = "omni.isaac.ros2_bridge.ROS2Context"
+            token node:type = "isaacsim.ros2.bridge.ROS2Context"
             int node:typeVersion = 2
             custom uint64 outputs:context = 0
             uniform token ui:nodegraph:node:expansionState = "open"
@@ -950,7 +950,7 @@ def Xform "andino" (
             custom double inputs:timeStamp = 0
             prepend double inputs:timeStamp.connect = </andino/ClockPublisher/isaac_read_simulation_time.outputs:simulationTime>
             custom string inputs:topicName = "clock"
-            token node:type = "omni.isaac.ros2_bridge.ROS2PublishClock"
+            token node:type = "isaacsim.ros2.bridge.ROS2PublishClock"
             int node:typeVersion = 1
             uniform token ui:nodegraph:node:expansionState = "open"
             uniform float2 ui:nodegraph:node:pos = (-1017.711, 744.7045)
@@ -962,7 +962,7 @@ def Xform "andino" (
         {
             custom bool inputs:resetOnStop = 0
             custom int64 inputs:swhFrameNumber = 0
-            token node:type = "omni.isaac.core_nodes.IsaacReadSimulationTime"
+            token node:type = "isaacsim.core.nodes.IsaacReadSimulationTime"
             int node:typeVersion = 1
             custom double outputs:simulationTime
             uniform token ui:nodegraph:node:expansionState = "open"
@@ -1002,7 +1002,7 @@ def Xform "andino" (
         {
             custom uchar inputs:domain_id = 0
             custom bool inputs:useDomainIDEnvVar = 0
-            token node:type = "omni.isaac.ros2_bridge.ROS2Context"
+            token node:type = "isaacsim.ros2.bridge.ROS2Context"
             int node:typeVersion = 2
             custom uint64 outputs:context = 0
             uniform token ui:nodegraph:node:expansionState = "open"
@@ -1093,7 +1093,7 @@ def Xform "andino" (
             custom bool inputs:usePath = 0
             custom double[] inputs:velocityCommand = []
             prepend double[] inputs:velocityCommand.connect = </andino/TwistSubscriber/differential_controller.outputs:velocityCommand>
-            token node:type = "omni.isaac.core_nodes.IsaacArticulationController"
+            token node:type = "isaacsim.core.nodes.IsaacArticulationController"
             int node:typeVersion = 1
             uniform token ui:nodegraph:node:expansionState = "open"
             uniform float2 ui:nodegraph:node:pos = (162.97087, 248.33023)
@@ -1144,7 +1144,7 @@ def Xform "andino" (
             custom double inputs:maxWheelSpeed = 0
             custom double inputs:wheelDistance = 0.137
             custom double inputs:wheelRadius = 0.035
-            token node:type = "omni.isaac.wheeled_robots.DifferentialController"
+            token node:type = "isaacsim.robot.wheeled_robots.DifferentialController"
             int node:typeVersion = 1
             custom double[] outputs:effortCommand
             custom double[] outputs:positionCommand
@@ -1164,7 +1164,7 @@ def Xform "andino" (
             custom string inputs:nodeNamespace = ""
             custom uint64 inputs:queueSize = 10
             custom string inputs:topicName = "cmd_vel"
-            token node:type = "omni.isaac.ros2_bridge.ROS2SubscribeTwist"
+            token node:type = "isaacsim.ros2.bridge.ROS2SubscribeTwist"
             int node:typeVersion = 1
             custom vector3d outputs:angularVelocity = (0, 0, 0)
             custom uint outputs:execOut (
@@ -1186,7 +1186,7 @@ def Xform "andino" (
             )
             custom token inputs:value
             prepend token inputs:value.connect = </andino/TwistSubscriber/ros2_subscribe_twist.outputs:linearVelocity>
-            token node:type = "omni.isaac.core_nodes.OgnIsaacScaleToFromStageUnit"
+            token node:type = "isaacsim.core.nodes.OgnIsaacScaleToFromStageUnit"
             int node:typeVersion = 1
             custom token outputs:result
             uniform token ui:nodegraph:node:expansionState = "open"
@@ -1226,7 +1226,7 @@ def Xform "andino" (
         {
             custom uchar inputs:domain_id = 0
             custom bool inputs:useDomainIDEnvVar = 0
-            token node:type = "omni.isaac.ros2_bridge.ROS2Context"
+            token node:type = "isaacsim.ros2.bridge.ROS2Context"
             int node:typeVersion = 2
             custom uint64 outputs:context = 0
             uniform token ui:nodegraph:node:expansionState = "open"
@@ -1239,7 +1239,7 @@ def Xform "andino" (
         {
             custom bool inputs:resetOnStop = 0
             custom int64 inputs:swhFrameNumber = 0
-            token node:type = "omni.isaac.core_nodes.IsaacReadSimulationTime"
+            token node:type = "isaacsim.core.nodes.IsaacReadSimulationTime"
             int node:typeVersion = 1
             custom double outputs:simulationTime
             uniform token ui:nodegraph:node:expansionState = "open"
@@ -1261,7 +1261,7 @@ def Xform "andino" (
                     }
                 }
             )
-            token node:type = "omni.isaac.range_sensor.IsaacReadLidarBeams"
+            token node:type = "isaacsim.sensors.physx.IsaacReadLidarBeams"
             int node:typeVersion = 1
             custom float2 outputs:azimuthRange
             custom float[] outputs:beamTimeData
@@ -1317,7 +1317,7 @@ def Xform "andino" (
             custom double inputs:timeStamp
             prepend double inputs:timeStamp.connect = </andino/LidarPublisher/isaac_read_simulation_time.outputs:simulationTime>
             custom string inputs:topicName
-            token node:type = "omni.isaac.ros2_bridge.ROS2PublishLaserScan"
+            token node:type = "isaacsim.ros2.bridge.ROS2PublishLaserScan"
             int node:typeVersion = 1
             uniform token ui:nodegraph:node:expansionState = "open"
             uniform float2 ui:nodegraph:node:pos = (-362.01828, 555.74976)
@@ -1356,7 +1356,7 @@ def Xform "andino" (
         {
             custom uchar inputs:domain_id = 0
             custom bool inputs:useDomainIDEnvVar = 0
-            token node:type = "omni.isaac.ros2_bridge.ROS2Context"
+            token node:type = "isaacsim.ros2.bridge.ROS2Context"
             int node:typeVersion = 2
             custom uint64 outputs:context = 0
             uniform token ui:nodegraph:node:expansionState = "open"
@@ -1370,7 +1370,7 @@ def Xform "andino" (
             custom token inputs:renderProductPath
             prepend token inputs:renderProductPath.connect = </andino/CameraPublisher/isaac_create_render_product.outputs:renderProductPath>
             custom token inputs:viewport
-            token node:type = "omni.isaac.core_nodes.IsaacReadCameraInfo"
+            token node:type = "isaacsim.core.nodes.IsaacReadCameraInfo"
             int node:typeVersion = 2
             custom float[] outputs:cameraFisheyeParams
             custom float outputs:focalLength
@@ -1422,7 +1422,7 @@ def Xform "andino" (
             prepend float inputs:verticalOffset.connect = </andino/CameraPublisher/isaac_read_camera_info.outputs:verticalOffset>
             custom uint inputs:width
             prepend uint inputs:width.connect = </andino/CameraPublisher/isaac_read_camera_info.outputs:width>
-            token node:type = "omni.isaac.ros2_bridge.ROS2PublishCameraInfo"
+            token node:type = "isaacsim.ros2.bridge.ROS2PublishCameraInfo"
             int node:typeVersion = 1
             uniform token ui:nodegraph:node:expansionState = "open"
             uniform float2 ui:nodegraph:node:pos = (-317.27692, 497.005)
@@ -1446,7 +1446,7 @@ def Xform "andino" (
             prepend uint inputs:execIn.connect = </andino/CameraPublisher/on_playback_tick.outputs:tick>
             custom uint inputs:height
             custom uint inputs:width
-            token node:type = "omni.isaac.core_nodes.IsaacCreateRenderProduct"
+            token node:type = "isaacsim.core.nodes.IsaacCreateRenderProduct"
             int node:typeVersion = 2
             custom uint outputs:execOut (
                 customData = {
@@ -1481,7 +1481,7 @@ def Xform "andino" (
                 allowedTokens = ["rgb", "depth", "depth_pcl", "instance_segmentation", "semantic_segmentation", "bbox_2d_tight", "bbox_2d_loose", "bbox_3d", "camera_info"]
             )
             custom token inputs:viewport
-            token node:type = "omni.isaac.ros2_bridge.ROS2CameraHelper"
+            token node:type = "isaacsim.ros2.bridge.ROS2CameraHelper"
             int node:typeVersion = 2
             uniform token ui:nodegraph:node:expansionState = "open"
             uniform float2 ui:nodegraph:node:pos = (-315.66064, 137.06247)
@@ -1493,7 +1493,7 @@ def Xform "andino" (
         {
             custom bool inputs:resetOnStop = 0
             custom int64 inputs:swhFrameNumber = 0
-            token node:type = "omni.isaac.core_nodes.IsaacReadSimulationTime"
+            token node:type = "isaacsim.core.nodes.IsaacReadSimulationTime"
             int node:typeVersion = 1
             custom double outputs:simulationTime
             uniform token ui:nodegraph:node:expansionState = "open"
@@ -1533,7 +1533,7 @@ def Xform "andino" (
         {
             custom uchar inputs:domain_id = 0
             custom bool inputs:useDomainIDEnvVar = 0
-            token node:type = "omni.isaac.ros2_bridge.ROS2Context"
+            token node:type = "isaacsim.ros2.bridge.ROS2Context"
             int node:typeVersion = 2
             custom uint64 outputs:context = 0
             uniform token ui:nodegraph:node:expansionState = "open"
@@ -1564,7 +1564,7 @@ def Xform "andino" (
             custom double inputs:timeStamp = 0
             prepend double inputs:timeStamp.connect = </andino/OdometryPublisher/isaac_read_simulation_time.outputs:simulationTime>
             custom string inputs:topicName = "odom"
-            token node:type = "omni.isaac.ros2_bridge.ROS2PublishOdometry"
+            token node:type = "isaacsim.ros2.bridge.ROS2PublishOdometry"
             int node:typeVersion = 1
             uniform token ui:nodegraph:node:expansionState = "open"
             uniform float2 ui:nodegraph:node:pos = (-629.8873, 467.33212)
@@ -1579,7 +1579,7 @@ def Xform "andino" (
             prepend rel inputs:chassisPrim = </andino/base_link>
             custom uint inputs:execIn
             prepend uint inputs:execIn.connect = </andino/OdometryPublisher/on_playback_tick.outputs:tick>
-            token node:type = "omni.isaac.core_nodes.IsaacComputeOdometry"
+            token node:type = "isaacsim.core.nodes.IsaacComputeOdometry"
             int node:typeVersion = 1
             custom vector3d outputs:angularAcceleration = (0, 0, 0)
             custom vector3d outputs:angularVelocity = (0, 0, 0)
@@ -1602,7 +1602,7 @@ def Xform "andino" (
         {
             custom bool inputs:resetOnStop = 0
             custom int64 inputs:swhFrameNumber = 0
-            token node:type = "omni.isaac.core_nodes.IsaacReadSimulationTime"
+            token node:type = "isaacsim.core.nodes.IsaacReadSimulationTime"
             int node:typeVersion = 1
             custom double outputs:simulationTime
             uniform token ui:nodegraph:node:expansionState = "open"
@@ -1628,7 +1628,7 @@ def Xform "andino" (
             custom string inputs:topicName
             custom vector3d inputs:translation
             prepend vector3d inputs:translation.connect = </andino/OdometryPublisher/isaac_compute_odometry_node.outputs:position>
-            token node:type = "omni.isaac.ros2_bridge.ROS2PublishRawTransformTree"
+            token node:type = "isaacsim.ros2.bridge.ROS2PublishRawTransformTree"
             int node:typeVersion = 1
             uniform token ui:nodegraph:node:expansionState = "open"
             uniform float2 ui:nodegraph:node:pos = (-666.0366, 795.692)
@@ -1667,7 +1667,7 @@ def Xform "andino" (
         {
             custom uchar inputs:domain_id = 0
             custom bool inputs:useDomainIDEnvVar = 0
-            token node:type = "omni.isaac.ros2_bridge.ROS2Context"
+            token node:type = "isaacsim.ros2.bridge.ROS2Context"
             int node:typeVersion = 2
             custom uint64 outputs:context = 0
             uniform token ui:nodegraph:node:expansionState = "open"
@@ -1680,7 +1680,7 @@ def Xform "andino" (
         {
             custom bool inputs:resetOnStop = 0
             custom int64 inputs:swhFrameNumber = 0
-            token node:type = "omni.isaac.core_nodes.IsaacReadSimulationTime"
+            token node:type = "isaacsim.core.nodes.IsaacReadSimulationTime"
             int node:typeVersion = 1
             custom double outputs:simulationTime
             uniform token ui:nodegraph:node:expansionState = "open"
@@ -1709,7 +1709,7 @@ def Xform "andino" (
             custom double inputs:timeStamp = 0
             prepend double inputs:timeStamp.connect = </andino/JointStatePublisher/isaac_read_simulation_time.outputs:simulationTime>
             custom string inputs:topicName = "joint_states"
-            token node:type = "omni.isaac.ros2_bridge.ROS2PublishJointState"
+            token node:type = "isaacsim.ros2.bridge.ROS2PublishJointState"
             int node:typeVersion = 1
             uniform token ui:nodegraph:node:expansionState = "open"
             uniform float2 ui:nodegraph:node:pos = (-978.962, 677.61926)

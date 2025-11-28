@@ -1,3 +1,4 @@
+import os  # <<< CAMBIO: para poder hacer rutas absolutas
 import argparse
 import carb
 import time
@@ -9,15 +10,30 @@ parser = argparse.ArgumentParser("Simulation loader argument parser")
 parser.add_argument("--world_file", required=True, help="Full path to the world file")
 parser.add_argument("--robot_file", help="Full path to the robot file")
 parser.add_argument("--headless", default="False", help="Run stage headless")
-parser.add_argument("--renderer", default="RayTracedLighting", choices=["RayTracedLighting", "PathTracing"], help="Renderer to use")
+parser.add_argument(
+    "--renderer",
+    default="RayTracedLighting",
+    choices=["RayTracedLighting", "PathTracing"],
+    help="Renderer to use",
+)
 args, unknown = parser.parse_known_args()
 
+# Use absolute paths
+world_file = os.path.abspath(args.world_file)
+robot_file = os.path.abspath(args.robot_file) if args.robot_file else None
+
 # This sample loads a usd stage and starts simulation
-CONFIG = {"width": 1280, "height": 720, "sync_loads": True, "headless": False, "renderer": "RayTracedLighting"}
+CONFIG = {
+    "width": 1280,
+    "height": 720,
+    "sync_loads": True,
+    "headless": False,
+    "renderer": "RayTracedLighting",
+}
 
 # Start the omniverse application
 if "True" in args.headless:
-	CONFIG["headless"] = True
+    CONFIG["headless"] = True
 CONFIG["renderer"] = args.renderer
 simulation_app = SimulationApp(launch_config=CONFIG)
 
@@ -41,10 +57,13 @@ simulation_app.update()
 import omni
 from isaacsim.core.utils.stage import is_stage_loading
 from isaacsim.core.utils.stage import add_reference_to_stage
+
 try:
-    omni.usd.get_context().open_stage(args.world_file)
+    omni.usd.get_context().open_stage(world_file)  # Use absolute path
 except ValueError:
-    carb.log_error(f"The usd path {args.world_file} could not be opened.")
+    carb.log_error(
+        f"The usd path {world_file} could not be opened."
+    )  # warning log if the file is not found
     simulation_app.close()
 simulation_app.update()
 simulation_app.update()
@@ -52,15 +71,21 @@ while is_stage_loading():
     simulation_app.update()
 
 # Load robot
-carb.log_info("Loading robot")
-try:
-	add_reference_to_stage(usd_path=args.robot_file, prim_path="/andino")
-	carb.log_info("Robot loaded")
-except FileNotFoundError:
-	carb.log_warn("Robot could not be loaded. Check robot file path or load it manually in the simulation")
+if robot_file is not None:
+    carb.log_info(f"Loading robot from: {robot_file}")
+    try:
+        add_reference_to_stage(usd_path=robot_file, prim_path="/andino")
+        carb.log_info("Robot loaded")
+    except FileNotFoundError:
+        carb.log_warn(
+            "Robot could not be loaded. Check robot file path or load it manually in the simulation"
+        )
+else:  # <<< CAMBIO: caso sin robot
+    carb.log_warn("No robot_file provided, skipping robot load")
 
 # Run the simulation loop
 from isaacsim.core.api.simulation_context import SimulationContext
+
 simulation_context = SimulationContext(stage_units_in_meters=1.0)
 
 rendering_dt = 1.0 / 60.0

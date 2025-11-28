@@ -42,5 +42,9 @@ RUN mkdir -p $USER_WS/persistence && chmod 777 $USER_WS/persistence
 
 COPY --link docker/entrypoint.sh /
 
+ENV ROS_DISTRO=jazzy
+ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/isaac-sim/exts/isaacsim.ros2.bridge/jazzy/lib
+
 CMD        ["/bin/bash"]
 ENTRYPOINT ["/entrypoint.sh"]

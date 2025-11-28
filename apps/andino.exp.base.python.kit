@@ -1,0 +1,163 @@
+[package]
+description = "A trimmed down app for use with python samples"
+title = "Isaac Sim Python"
+version = "5.1.0"
+
+keywords = ["experience", "app", "usd", "isaacsim", "andino"] # That makes it browsable in UI with "experience" filter
+
+[dependencies]
+
+# Isaac Sim core / gui / robots / sensors
+"isaacsim.app.about" = {}
+"isaacsim.asset.browser" = {}
+"isaacsim.core.api" = {}
+"isaacsim.core.cloner" = {}
+"isaacsim.core.deprecation_manager" = { order = -100 }
+"isaacsim.core.experimental.materials" = {}
+"isaacsim.core.experimental.objects" = {}
+"isaacsim.core.experimental.prims" = {}
+"isaacsim.core.experimental.utils" = {}
+"isaacsim.core.nodes" = {}
+"isaacsim.core.simulation_manager" = {}
+"isaacsim.core.throttling" = {}
+"isaacsim.core.utils" = {}
+"isaacsim.core.version" = {}
+"isaacsim.gui.menu" = {}
+"isaacsim.gui.content_browser" = {}
+"isaacsim.gui.property" = {}
+"isaacsim.gui.sensors.icon" = {}
+"isaacsim.robot_motion.lula" = {}
+"isaacsim.robot_motion.motion_generation" = {}
+"isaacsim.robot.manipulators" = {}
+"isaacsim.robot.schema" = {}
+"isaacsim.robot.surface_gripper" = {}
+"isaacsim.robot.wheeled_robots" = {}
+"isaacsim.sensors.camera" = {}
+"isaacsim.sensors.physics" = {}
+"isaacsim.sensors.physx" = {}
+"isaacsim.sensors.rtx" = {}
+"isaacsim.simulation_app" = {}
+"isaacsim.storage.native" = {}
+"isaacsim.util.debug_draw" = {}
+"omni.kit.loop-isaac" = {}
+"omni.pip.cloud" = {}
+"omni.pip.compute" = {}
+
+# ROS 2 Bridge (NECESARIO para compatibilidad con ROS2)
+"isaacsim.ros2.bridge" = {}
+
+# Isaac Sim Extra útiles para robótica (importar modelos, PhysX tensors)
+"isaacsim.asset.importer.mjcf" = {}
+"isaacsim.asset.importer.urdf" = {}
+"omni.physx.tensors" = {}
+
+# Kit based editor extensions (UI, viewport, OmniGraph, etc)
+"omni.anim.curve.core" = {}
+"omni.anim.graph.schema" = {}
+"omni.anim.navigation.schema" = {}
+"omni.graph.action" = {}
+"omni.graph.core" = {}
+"omni.graph.nodes" = {}
+"omni.graph.scriptnode" = {}
+"omni.graph.ui_nodes" = {}
+"omni.hydra.engine.stats" = {}
+"omni.hydra.rtx" = {}
+"omni.kit.mainwindow" = {}
+"omni.kit.manipulator.camera" = {}
+"omni.kit.manipulator.prim" = {}
+"omni.kit.manipulator.selection" = {}
+"omni.kit.material.library" = {}
+"omni.kit.menu.common" = { order = 1000 }
+"omni.kit.menu.create" = {}
+"omni.kit.menu.stage" = {}
+"omni.kit.menu.utils" = {}
+"omni.kit.primitive.mesh" = {}
+"omni.kit.property.bundle" = {}
+"omni.kit.raycast.query" = {}
+"omni.kit.stage_template.core" = {}
+"omni.kit.telemetry" = {}
+"omni.kit.tool.asset_importer" = {}
+"omni.kit.tool.collect" = {}
+"omni.kit.viewport.legacy_gizmos" = {}
+"omni.kit.viewport.menubar.camera" = {}
+"omni.kit.viewport.menubar.display" = {}
+"omni.kit.viewport.menubar.lighting" = {}
+"omni.kit.viewport.menubar.render" = {}
+"omni.kit.viewport.menubar.settings" = {}
+"omni.kit.viewport.scene_camera_model" = {}
+"omni.kit.viewport.window" = {}
+"omni.kit.window.console" = {}
+"omni.kit.window.content_browser" = {}
+"omni.kit.window.property" = {}
+"omni.kit.window.stage" = {}
+"omni.kit.window.status_bar" = {}
+"omni.kit.window.toolbar" = {}
+"omni.physics.physx" = {}
+"omni.physics.stageupdate" = {}
+"omni.rtx.settings.core" = {}
+"omni.uiaudio" = {}
+"omni.usd.metrics.assembler.ui" = {}
+"omni.usd.schema.flow" = {}
+"omni.usd.schema.metrics.assembler" = {}
+"omni.warp.core" = {}
+"omni.hydra.usdrt_delegate" = {}
+
+
+[settings]
+exts."omni.kit.material.library".ui_show_list = [
+    "OmniPBR",
+    "OmniGlass",
+    "OmniSurface",
+    "USD Preview Surface",
+]
+exts."omni.kit.renderer.core".present.enabled = false # Fixes MGPU stability issue
+exts."omni.kit.viewport.window".windowMenu.entryCount = 1 # Allow user to create two viewports by default
+exts."omni.kit.viewport.window".windowMenu.label = "" # Put Viewport menuitem under Window menu
+exts."omni.rtx.window.settings".window_menu = "Window" # Where to put the render settings menuitem
+exts."omni.usd".locking.onClose = false # reduce time it takes to close/create stage
+exts."omni.ui".raster.default_rasterpolicy_enabled = true # Improve UI rendering performance
+exts."omni.kit.widget.graph".raster_nodes = true # Improve UI rendering performance
+renderer.asyncInit = true # Don't block while renderer inits
+renderer.gpuEnumeration.glInterop.enabled = false # Improves startup speed.
+rtx-transient.dlssg.enabled = false # DLSSG frame generation is not compatible with synthetic data generation
+rtx.hydra.mdlMaterialWarmup = true # start loading the MDL shaders needed before any delegate is actually created.
+rtx.post.dlss.execMode = 0 # Set the DLSS model can be 0 (Performance), 1 (Balanced), 2 (Quality), or 3 (Auto)
+foundation.verifyOsVersion.enabled = false
+physics.autoPopupSimulationOutputWindow = false
+
+# Enable ROS 2 bridge by default
+[settings."filter:platform"."windows-x86_64"]
+isaac.startup.ros_bridge_extension = ""
+
+[settings."filter:platform"."linux-x86_64"]
+isaac.startup.ros_bridge_extension = ""
+
+[settings.app]
+name = "Isaac-Sim Python"
+version = "5.1.0"
+settings.persistent = false        # settings reset on each run with this app
+window.title = "Isaac Sim Python"
+vulkan = true                      # Explicitly enable Vulkan
+enableDeveloperWarnings = false    # disable developer warnings to reduce log noise
+### async rendering settings
+asyncRendering = false
+asyncRenderingLowLatency = false
+
+[settings.app.window]
+title = "Isaac Sim Base"
+
+[settings.app.exts.folders]
+'++' = [
+    "/isaac-sim",
+    "/isaac-sim/exts",
+    "/isaac-sim/extscache",
+    "/isaac-sim/extsUser",
+    "/isaac-sim/extsDeprecated",
+]
+
+[settings.exts."omni.kit.registry.nucleus"]
+registries = [
+	{ name = "kit/default", url = "https://ovextensionsprod.blob.core.windows.net/exts/kit/prod/107/shared" },
+	{ name = "kit/sdk", url = "https://ovextensionsprod.blob.core.windows.net/exts/kit/prod/sdk/${kit_version_short}/${kit_git_hash}" },
+	{ name = "kit/community", url = "https://dw290v42wisod.cloudfront.net/exts/kit/community" },
+]

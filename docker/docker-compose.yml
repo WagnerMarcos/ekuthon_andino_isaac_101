@@ -1,16 +1,16 @@
 services:
   andino_isaac:
-    user: ${USERID}:${GROUPID}
     build:
       context: ..
       dockerfile: docker/Dockerfile
+      args:
+        LOCAL_UID: ${LOCAL_UID}
+        LOCAL_GID: ${LOCAL_GID}
     container_name: andino_isaac
     network_mode: host
     working_dir: /home/isaac-sim/ws/
     privileged: true
     environment:
-      - LOCAL_UID=${LOCAL_UID}
-      - LOCAL_GID=${LOCAL_GID}
       - ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-10}
       - DISPLAY
       - QT_X11_NO_MITSHM=1
@@ -24,12 +24,12 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - /tmp/.docker.xauth:/tmp/.docker.xauth
       # Various Isaac directories
-      - ./docker/isaac-sim/cache/main:/isaac-sim/.cache:rw \
-      - ./docker/isaac-sim/cache/computecache:/isaac-sim/.nv/ComputeCache:rw \
-      - ./docker/isaac-sim/logs:/isaac-sim/.nvidia-omniverse/logs:rw \
-      - ./docker/isaac-sim/config:/isaac-sim/.nvidia-omniverse/config:rw \
-      - ./docker/isaac-sim/data:/isaac-sim/.local/share/ov/data:rw \
-      - ./docker/isaac-sim/pkg:/isaac-sim/.local/share/ov/pkg:rw \
+      - ./isaac-sim-cache/cache/main:/isaac-sim/.cache:rw
+      - ./isaac-sim-cache/cache/computecache:/isaac-sim/.nv/ComputeCache:rw
+      - ./isaac-sim-cache/logs:/isaac-sim/.nvidia-omniverse/logs:rw
+      - ./isaac-sim-cache/config:/isaac-sim/.nvidia-omniverse/config:rw
+      - ./isaac-sim-cache/data:/isaac-sim/.local/share/ov/data:rw
+      - ./isaac-sim-cache/pkg:/isaac-sim/.local/share/ov/pkg:rw
       # Workspace
       - ..:/home/isaac-sim/ws/src/andino_isaac:rw
     devices:

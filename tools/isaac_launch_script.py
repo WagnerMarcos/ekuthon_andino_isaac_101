@@ -42,7 +42,7 @@ CONFIG = {
 if "True" in args.headless:
     CONFIG["headless"] = True
 CONFIG["renderer"] = args.renderer
-
+# Now that the simulation app is open, continue to load the extension, world and robot
 simulation_app = SimulationApp(launch_config=CONFIG)
 
 from isaacsim.core.utils.extensions import enable_extension

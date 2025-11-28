@@ -1,6 +1,5 @@
 services:
   andino_isaac:
-    # user: ${USERID}:${GROUPID}
     build:
       context: ..
       dockerfile: docker/Dockerfile

@@ -72,6 +72,11 @@ def generate_launch_description():
         default_value='false',
         description='Run rviz node.'
     )
+    experience = DeclareLaunchArgument(
+        'experience',
+        default_value='/isaac-sim/apps/isaacsim.exp.base.kit',
+        description='Path to the Omniverse Experience.'
+    )
 
     # Look for the omniverse install path
     isaac_install_path = search_isaac_install_path()
@@ -101,32 +106,35 @@ def generate_launch_description():
                 parameters=[{'use_sim_time': True}],
                 condition=IfCondition(LaunchConfiguration('rviz'))
     )
+    
+    isaac_sim = ExecuteProcess(
+        cmd = [
+            isaac_python_launcher_path,
+            isaac_custom_launch_script,
+            '--world_file', full_path_to_world,
+            '--robot_file', full_path_to_robot,
+            '--headless', LaunchConfiguration('headless'),
+            '--renderer', LaunchConfiguration('renderer'),
+            '--experience', LaunchConfiguration('experience')
+        ],
+        shell = LaunchConfiguration('verbose'),
+        output = "screen",
+        additional_env = {
+            "RMW_IMPLEMENTATION": rmw_implementation_env_var,
+            "LD_LIBRARY_PATH": ld_library_path_env_var
+        }
+    )
 
     return LaunchDescription([
         world_name,
         robot_name,
         headless,
         renderer,
+        experience,
         verbose,
         rviz_argument,
         rviz,
         rsp_argument,
         rsp,
-
-        ExecuteProcess(
-            cmd = [
-                isaac_python_launcher_path,
-                isaac_custom_launch_script,
-                '--world_file', full_path_to_world,
-                '--robot_file', full_path_to_robot,
-                '--headless', LaunchConfiguration('headless'),
-                '--renderer', LaunchConfiguration('renderer')
-            ],
-            shell = LaunchConfiguration('verbose'),
-            output = "screen",
-            additional_env = {
-                "RMW_IMPLEMENTATION": rmw_implementation_env_var,
-                "LD_LIBRARY_PATH": ld_library_path_env_var
-            }
-        )
+        isaac_sim
     ])

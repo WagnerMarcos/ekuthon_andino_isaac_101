@@ -8,7 +8,7 @@ from isaacsim.simulation_app import SimulationApp
 
 # Set up command line arguments
 parser = argparse.ArgumentParser("Simulation loader argument parser")
-parser.add_argument("--world_file", required=True, help="Full path to the world file")
+parser.add_argument("--world_file", help="Full path to the world file")
 parser.add_argument("--robot_file", help="Full path to the robot file")
 parser.add_argument("--headless", default="False", help="Run stage headless")
 parser.add_argument(
@@ -24,6 +24,13 @@ env_robot = os.environ.get("ROBOT_FILE")
 
 world_source = env_world if env_world else args.world_file
 robot_source = env_robot if env_robot else args.robot_file
+
+# Si por alguna razón no vino ni env ni argumento, abortamos con un error claro
+if world_source is None:
+    carb.log_error(
+        "[ANDINO] No world file provided. Set WORLD_FILE env var or use --world_file."
+    )
+    raise SystemExit(1)
 
 world_file = os.path.abspath(world_source)
 robot_file = os.path.abspath(robot_source) if robot_source else None
@@ -71,6 +78,7 @@ try:
 except ValueError:
     carb.log_error(f"The USD path {world_file} could not be opened.")
     simulation_app.close()
+    raise SystemExit(1)
 
 simulation_app.update()
 simulation_app.update()

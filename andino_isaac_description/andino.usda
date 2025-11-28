@@ -259,7 +259,9 @@ def Xform "andino" (
         def "geometry" (
           prepend references = @./meshes.usda@</AndinoMeshes/base_link_visuals>
         )
-        {}
+        {
+            rel material:binding = </andino/Looks/material_blue>
+        }
 
         def Cube "collisions" (
             prepend apiSchemas = ["PhysicsCollisionAPI"]
@@ -441,7 +443,9 @@ def Xform "andino" (
         def "geometry" (
           prepend references = @./meshes.usda@</AndinoMeshes/camera_link_visuals>
         )
-        {}
+        {
+            rel material:binding = </andino/Looks/material_blue>
+        }
 
 
         def Cube "collisions" (
@@ -491,6 +495,7 @@ def Xform "andino" (
           prepend references = @./meshes.usda@</AndinoMeshes/caster_base_link_visuals>
         )
         {
+          rel material:binding = </andino/Looks/material_silver>
           double3 xformOp:translate = (0, 0, -0.019999999552965164)
           uniform token[] xformOpOrder = ["xformOp:translate"]
         }
@@ -528,6 +533,7 @@ def Xform "andino" (
           prepend references = @./meshes.usda@</AndinoMeshes/caster_rotation_link_visuals>
         )
         {
+          rel material:binding = </andino/Looks/material_silver>
           double3 xformOp:translate = (0, 0, -0.019999999552965164)
         }
 
@@ -576,7 +582,9 @@ def Xform "andino" (
         def "geometry" (
           prepend references = @./meshes.usda@</AndinoMeshes/caster_wheel_link_visuals>
         )
-        {}
+        {
+            rel material:binding = </andino/Looks/material_black>
+        }
 
         def Cylinder "collisions" (
             prepend apiSchemas = ["PhysicsCollisionAPI"]
@@ -622,7 +630,9 @@ def Xform "andino" (
         def "geometry" (
           prepend references = @./meshes.usda@</AndinoMeshes/left_motor_visuals>
         )
-        {}
+        {
+            rel material:binding = </andino/Looks/material_light_blue>
+        }
 
         def Cube "collisions" (
             prepend apiSchemas = ["PhysicsCollisionAPI"]
@@ -659,6 +669,7 @@ def Xform "andino" (
           prepend references = @./meshes.usda@</AndinoMeshes/left_wheel_visuals>
         )
         {
+            rel material:binding = </andino/Looks/material_dark_grey>
             quatd xformOp:orient = (0.7071067690849304, 0.7071067690849304, 0, 0)
             uniform token[] xformOpOrder = ["xformOp:orient"]
         }
@@ -708,6 +719,7 @@ def Xform "andino" (
           prepend references = @./meshes.usda@</AndinoMeshes/right_motor_visuals>
         )
         {
+            rel material:binding = </andino/Looks/material_light_blue>
             quatd xformOp:orient = (-4.371138828673793e-8, 0, -0, -1)
             uniform token[] xformOpOrder = ["xformOp:orient"]
         }
@@ -744,6 +756,7 @@ def Xform "andino" (
           prepend references = @./meshes.usda@</AndinoMeshes/right_wheel_visuals>
         )
         {
+            rel material:binding = </andino/Looks/material_dark_grey>
             quatd xformOp:orient = (-3.0908619663705394e-8, -3.0908619663705394e-8, -0.7071067690849304, -0.7071067690849304)
             uniform token[] xformOpOrder = ["xformOp:orient"]
         }
@@ -793,6 +806,7 @@ def Xform "andino" (
           prepend references = @./meshes.usda@</AndinoMeshes/second_base_link_visuals>
         )
         {
+            rel material:binding = </andino/Looks/material_blue>
             double3 xformOp:translate = (0, 0, 0.05000000074505806)
             uniform token[] xformOpOrder = ["xformOp:translate"]
         }
@@ -841,6 +855,7 @@ def Xform "andino" (
           prepend references = @./meshes.usda@</AndinoMeshes/rplidar_laser_link_visuals>
         )
         {
+            rel material:binding = </andino/Looks/material_dark_grey>
             quatd xformOp:orient = (-4.371138828673793e-8, 0, 0, 1)
             uniform token[] xformOpOrder = ["xformOp:orient"]
         }

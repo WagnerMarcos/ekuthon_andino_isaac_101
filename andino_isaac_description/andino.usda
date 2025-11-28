@@ -491,7 +491,8 @@ def Xform "andino" (
           prepend references = @./meshes.usda@</AndinoMeshes/caster_base_link_visuals>
         )
         {
-          # double3 xformOp:translate = (0, 0, -0.019999999552965164)
+          double3 xformOp:translate = (0, 0, -0.019999999552965164)
+          uniform token[] xformOpOrder = ["xformOp:translate"]
         }
 
         def Cube "collisions" (

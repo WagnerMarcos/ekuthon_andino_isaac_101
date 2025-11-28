@@ -5,21 +5,21 @@ set -e
 # Allow X11 clients from any host (required for GUI apps in Docker)
 sudo xhost +
 
-mkdir -p ./docker/isaac-sim/cache/main
-mkdir -p ./docker/isaac-sim/cache/computecache
-mkdir -p ./docker/isaac-sim/logs
-mkdir -p ./docker/isaac-sim/config
-mkdir -p ./docker/isaac-sim/data
-mkdir -p ./docker/isaac-sim/pkg
-
 # Always run from the directory where this script is located (docker/)
 SCRIPT_NAME="$(readlink -f "$0")"
 cd "$(dirname "$SCRIPT_NAME")"
 
+mkdir -p ./isaac-sim-cache/cache/main
+mkdir -p ./isaac-sim-cache/cache/computecache
+mkdir -p ./isaac-sim-cache/logs
+mkdir -p ./isaac-sim-cache/config
+mkdir -p ./isaac-sim-cache/data
+mkdir -p ./isaac-sim-cache/pkg
+
 BUILD=""
 BUILD_KIT=""
-WORLD_NAME=""
-ROBOT_NAME=""
+WORLD_NAME="plain_world.usda"
+ROBOT_NAME="andino.usda"
 
 # ---------------------------------------------------------------------
 # Parse CLI arguments
@@ -54,28 +54,24 @@ while [ "$#" -gt 0 ]; do
     fi
 done
 
-WORLD_PATH=""
-ROBOT_PATH=""
-
-# If a world name is provided, map it to the isaac_worlds directory
-if [ -n "$WORLD_NAME" ]; then
-    WORLD_PATH="./src/andino_isaac/isaac_worlds/${WORLD_NAME}"
-fi
-
-# If a robot name is provided, map it to the description directory
-if [ -n "$ROBOT_NAME" ]; then
-    ROBOT_PATH="./src/andino_isaac/andino_isaac_description/${ROBOT_NAME}"
-fi
+PATH_TO_WORLD_DIR="./src/andino_isaac/isaac_worlds/"
+PATH_TO_ROBOT_DIR="./src/andino_isaac/andino_isaac_description/"
+WORLD_PATH="${PATH_TO_WORLD_DIR}${WORLD_NAME}"
+ROBOT_PATH="${PATH_TO_ROBOT_DIR}${ROBOT_NAME}"
 
 # Enable BuildKit for docker builds if requested
 if [ -n "$BUILD_KIT" ]; then
     export DOCKER_BUILDKIT=1
 fi
 
+LOCAL_UID=$(id -u)
+LOCAL_GID=$(id -g)
+export LOCAL_UID LOCAL_GID
+
 # Run the container, passing world/robot to the container as env vars
 docker compose run ${BUILD} --rm --remove-orphans \
     -e WORLD_FILE="${WORLD_PATH}" \
     -e ROBOT_FILE="${ROBOT_PATH}" \
-    -e LOCAL_UID=$(id -u) \
-    -e LOCAL_GID=$(id -g) \
+    -e LOCAL_UID=${LOCAL_UID} \
+    -e LOCAL_GID=${LOCAL_GID} \
     andino_isaac

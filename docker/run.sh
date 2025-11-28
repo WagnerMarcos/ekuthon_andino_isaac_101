@@ -71,5 +71,5 @@ export LOCAL_UID LOCAL_GID
 # Run the container, passing world/robot to the container as env vars
 docker compose run ${BUILD} --rm --remove-orphans \
     -e WORLD_FILE="${WORLD_PATH}" \
-    -e ROBOT_FILE="${ROBOT_PATH}"
+    -e ROBOT_FILE="${ROBOT_PATH}" \
     andino_isaac

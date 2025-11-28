@@ -47,4 +47,3 @@ ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/isaac-sim/exts/isaacsim.ros2.bridge/jazzy/lib
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["/isaac-sim/python.sh", "./src/andino_isaac/tools/isaac_launch_script.py"]

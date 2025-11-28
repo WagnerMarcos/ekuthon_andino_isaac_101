@@ -3,5 +3,5 @@ set -e
 
 # Continue with the container startup
 exec gosu isaac-sim "$@"
-
-exec "$@"
+source /opt/ros/humble/setup.bash
+bash
